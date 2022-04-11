@@ -13,7 +13,7 @@
 
 // Variables
 int dato=0;
-
+double timeStart, timeFinish;
 // Definición de objetos
 
 // Condiciones iniciales - Se ejecuta sólo una vez al energizar
@@ -26,15 +26,30 @@ void setup() {// Inicio de void setup ()
 // Cuerpo del programa - Se ejecuta constamente
 void loop() {// Inicio de void loop
   // put your main code here, to run repeatedly:
-  dato++; // dato=dato+1; forma alternativa
-  Serial.println(dato);
-  delay(1000);
-  //Contador de anillo con comparaciones
-  if (dato>8) {
-    dato=0;
+  dato=0;
+  timeStart=micros();
+  for(int i=0;i<10000;i++) {
+    dato++; // dato=dato+1; forma alternativa
+    //Contador de anillo con comparaciones
+    if (dato>8) {
+      dato=0;
+    }
   }
-  //Contador de anillo con operador
-  //dato%=8;
+  timeFinish=micros();
+  Serial.print("Con comparaciones: ");
+  Serial.println(timeFinish-timeStart); //Mandar al monitor serial la resta de las 2 variables
+  delay(2000);
+  dato=0;
+  timeStart=micros();
+  for(int i=0;i<10000;i++) {
+    dato++; // dato=dato+1; forma alternativa
+    //Contador de anillo con operador
+    dato%=8;
+  }
+  timeFinish=micros();
+  Serial.print("Con Operador: ");
+  Serial.println(timeFinish-timeStart); //Mandar al monitor serial la resta de las 2 variables
+  delay(2000);
 }// Fin de void loop
 
 // Funcioes del usuario
