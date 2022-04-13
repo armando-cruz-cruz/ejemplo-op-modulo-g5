@@ -29,11 +29,8 @@ void loop() {// Inicio de void loop
   dato=0;
   timeStart=micros();
   for(int i=0;i<10000;i++) {
-    dato++; // dato=dato+1; forma alternativa
-    //Contador de anillo con comparaciones
-    if (dato>8) {
-      dato=0;
-    }
+    //Contador de anillo con op ternario
+    dato=(dato==8)? 0:dato+1;
   }
   timeFinish=micros();
   Serial.print("Con comparaciones: ");
